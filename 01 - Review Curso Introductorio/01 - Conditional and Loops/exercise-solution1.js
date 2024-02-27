@@ -6,7 +6,7 @@
 function calculateSalary(role) {
   switch (role) {
     case "ceo":
-      return 2200;
+      return "2200";
     case "manager":
       return 1800;
     case "cto":
