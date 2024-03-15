@@ -52,3 +52,5 @@ console.log(person.fullName);
 person.firstName = "Maria";
 person.lastName = "Verdi";
 console.log(person.fullName);
+person.age = 35;
+console.log(person.age);
