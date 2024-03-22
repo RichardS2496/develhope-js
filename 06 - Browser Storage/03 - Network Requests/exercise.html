@@ -5,23 +5,27 @@
 </html>
 
 <script>
-  async function getingData(id) {
+  async function gettingData(id) {
     try {
       const res = await fetch(
         `https://jsonplaceholder.typicode.com/todos/${id}`
       );
       const todo = await res.json();
-      const template = `
-    <h2 style = "font-size: 60px">${todo.title}</h2>
-    <br>
-    <Input style="margin-left: 2rem" Type = "Checkbox">
-    
-    `;
-      document.getElementById("container").innerHTML = template;
+
+      const titleElement = document.createElement("h1");
+      titleElement.textContent = todo.title;
+
+      const checkElement = document.createElement("input");
+      checkElement.type = "checkbox";
+      checkElement.checked = todo.completed;
+
+      const divSection = document.getElementById("container");
+      divSection.appendChild(titleElement);
+      divSection.appendChild(checkElement);
     } catch (err) {
       console.error(err);
     }
   }
 
-  getingData(4);
+  gettingData(4);
 </script>
