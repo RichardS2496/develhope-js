@@ -48,6 +48,13 @@ const notes = [
   },
 ];
 
-function uncompletedNotes(notes) {}
+function uncompletedNotes(notes) {
+  const newArr = [];
+  notes.forEach((note) => {
+    const uncompletedTodos = note.todos.filter((todo) => !todo.done);
+    console.log(uncompletedTodos); //en este punto no supe como mostrar el resultado
+  });
+  return newArr;
+}
 
 uncompletedNotes(notes);

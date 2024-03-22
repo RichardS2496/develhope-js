@@ -1,0 +1,27 @@
+<html>
+  <body>
+    <div id="container" style="display: flex; align-items: center"></div>
+  </body>
+</html>
+
+<script>
+  async function getingData(id) {
+    try {
+      const res = await fetch(
+        `https://jsonplaceholder.typicode.com/todos/${id}`
+      );
+      const todo = await res.json();
+      const template = `
+    <h2 style = "font-size: 60px">${todo.title}</h2>
+    <br>
+    <Input style="margin-left: 2rem" Type = "Checkbox">
+    
+    `;
+      document.getElementById("container").innerHTML = template;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  getingData(4);
+</script>
