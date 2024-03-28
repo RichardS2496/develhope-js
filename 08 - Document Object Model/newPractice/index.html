@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="refreshBtn"></button>
+    <div id="container" class="container">
+      <ul id="firstUl"></ul>
+      <ul id="addedElements"></ul>
+    </div>
+  </body>
+</html>
+
+<script>
+  window.addEventListener("DOMContentLoaded", async () => {
+    //Fetch data
+    const result = await fetch("https://jsonplaceholder.typicode.com/todos");
+    const data = await result.json();
+    //Get HTML Element
+    let arrAdded = loadAddedItems();
+    function loadAddedItems() {
+      // Get all keys from localStorage
+      return Object.keys(localStorage);
+    }
+
+    const firstUlElement = document.getElementById("firstUl");
+    const secondUlElement = document.getElementById("addedElements");
+
+    //Iterate items, create li, add content
+
+    function displayTodos() {
+      firstUlElement.innerHTML = "";
+      data.forEach((item) => {
+        if (!arrAdded.includes(item.id)) {
+          const liElement = document.createElement("li");
+          liElement.textContent = `${item.id} - ${item.title}`;
+          const btnElement = document.createElement("button");
+          btnElement.textContent = `Add`;
+          btnElement.addEventListener("click", () => {
+            localStorage.setItem(item.id, JSON.stringify(item));
+          });
+
+          //adding elements to DOM
+          firstUlElement.appendChild(liElement);
+          liElement.appendChild(btnElement);
+        }
+      });
+    }
+    function displayNewList() {
+      secondUlElement.innerHTML = "";
+      arrAdded.forEach((id) => {
+        const liElement2 = document.createElement("li");
+        liElement2.textContent = `${id}`;
+        secondUlElement.appendChild(liElement2);
+      });
+    }
+
+    function updateUi() {
+      arrAdded = loadAddedItems();
+      displayTodos();
+      displayNewList();
+    }
+
+    const refreshBtn = document.getElementById("refreshBtn");
+    refreshBtn.textContent = "Refresh";
+    refreshBtn.addEventListener("click", updateUi);
+
+    updateUi();
+  });
+</script>

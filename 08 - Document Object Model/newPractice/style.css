@@ -1,0 +1,11 @@
+li button {
+  margin-left: 20px;
+  background-color: #00bce6;
+  border: none;
+  border-radius: 5px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
